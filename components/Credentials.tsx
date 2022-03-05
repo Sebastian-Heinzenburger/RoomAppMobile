@@ -5,17 +5,16 @@ export async function isLoggedIn() {
     if (global.token)
         return true;
 
-    let token = false;
+    let token: string|boolean = false;
     try {
-        let token = await readAsStringAsync(documentDirectory + `token`);
+        token = await readAsStringAsync(documentDirectory + `token`);
     } catch { return false; }
 
     if (token) {
         //@ts-ignore
         global.token = token;
-        return true;
+        return token;
     }
-
     return false;
 }
 

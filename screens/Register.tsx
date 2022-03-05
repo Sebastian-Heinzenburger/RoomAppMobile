@@ -97,6 +97,7 @@ export const Register = ({ navigation }: any) => {
 
             <ClearTextInput name="Vorname" error={errVorname} valuePair={[vorname, (e) => { setErrVorname(false); setVorname(e) }]} />
             <ClearTextInput name="Nachname" error={errNachname} valuePair={[nachname, (e) => { setErrNachname(false); setNachname(e) }]} />
+            <View style={{marginVertical: 30}}></View>
             <ClearTextInput name="Passwort" error={errPass1} valuePair={[pass1, (e) => { seterrPass1(false); setPass1(e) }]} secureTextEntry={true} />
             <ClearTextInput name="Passwort wiederholen" error={errPass2} valuePair={[pass2, (e) => { setErrPass2(false); setPass2(e) }]} secureTextEntry={true} />
 

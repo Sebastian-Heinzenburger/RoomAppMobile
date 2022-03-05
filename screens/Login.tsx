@@ -56,6 +56,7 @@ export const Login = ({ navigation }: any) => {
 
                     default:
                         console.error("could not log in");
+                        setErrPassword(true);
                         break;
                 }
 

@@ -1,21 +1,21 @@
-import { View, StyleSheet, Text, TextInput } from "react-native";
+import { View, StyleSheet, Text, TextInput, KeyboardTypeOptions } from "react-native";
 import { colors } from "./Colors";
 import { Dispatch, SetStateAction, useState } from "react";
 
-export const ClearTextInput = (props: { name?: string, error?: boolean, valuePair: [string, Dispatch<SetStateAction<string>>], secureTextEntry?: boolean, style?: any }) => {
+export const ClearTextInput = (props: { name?: string, type?: KeyboardTypeOptions, error?: boolean, valuePair: [string, Dispatch<SetStateAction<string>>], secureTextEntry?: boolean, style?: any }) => {
 
     return (
         <View style={[styles.textView, props.style]}>
 
             <View style={styles.textInputDescrView}>
-                <Text style={[styles.textInputDescr, props.error ? {color: colors.redorange}:null]}>{props.name}</Text>
+                <Text style={[styles.textInputDescr, props.error ? { color: colors.redorange } : null]}>{props.name}</Text>
             </View>
 
-            <TextInput style={[styles.textInput, props.error ? {borderColor: colors.redorange}:null]}
+            <TextInput style={[styles.textInput, props.error ? { borderColor: colors.redorange } : null]}
                 value={props.valuePair[0]}
                 onChangeText={props.valuePair[1]}
+                keyboardType={props.type}
                 secureTextEntry={props.secureTextEntry} />
-
         </View>
     );
 }
