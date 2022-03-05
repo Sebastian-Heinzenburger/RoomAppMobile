@@ -1,38 +1,57 @@
-import { useState } from "react";
 import { View, StyleSheet, Text, TextInput } from "react-native";
+import { colors } from "./Colors";
+import { Dispatch, SetStateAction, useState } from "react";
 
-export const ClearTextInput = (props: {name?: string, secureTextEntry?: boolean, style?: any}) => {
-    const [value, setValue] = useState("");
-    
+export const ClearTextInput = (props: { name?: string, error?: boolean, valuePair: [string, Dispatch<SetStateAction<string>>], secureTextEntry?: boolean, style?: any }) => {
+
     return (
         <View style={[styles.textView, props.style]}>
-            <Text style={styles.textInputDescr}>{props.name}</Text>
-            <TextInput style={[styles.textInput]} placeholder="" value={value} onChangeText={(t) => {setValue(t)}} secureTextEntry={props.secureTextEntry}/>
+
+            <View style={styles.textInputDescrView}>
+                <Text style={[styles.textInputDescr, props.error ? {color: colors.redorange}:null]}>{props.name}</Text>
+            </View>
+
+            <TextInput style={[styles.textInput, props.error ? {borderColor: colors.redorange}:null]}
+                value={props.valuePair[0]}
+                onChangeText={props.valuePair[1]}
+                secureTextEntry={props.secureTextEntry} />
+
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     textInput: {
-        borderColor: "#277DA1",
+        borderColor: colors.accent,
         borderRadius: 8,
         borderStyle: "solid",
         borderWidth: 2,
         fontSize: 18,
         padding: 10,
-        backgroundColor: "#e6e5e5",
+        backgroundColor: colors.white,
     },
     textView: {
         height: "auto",
-        width: "70%",
-        // backgroundColor: "green",
+        width: "75%",
     },
     textInputDescr: {
         fontSize: 12,
         paddingLeft: 5,
         marginBottom: 2,
         paddingTop: 5,
-        marginTop: 50,
-        color: "#277DA1",
+        // marginTop: 50,
+        color: colors.accent,
+    },
+    textInputDescrView: {
+        display: "flex",
+        flexDirection: "row",
+    },
+    textInputError: {
+        fontSize: 12,
+        paddingLeft: 25,
+        marginBottom: 2,
+        paddingTop: 5,
+        // marginTop: 50,
+        color: colors.redorange,
     }
 });

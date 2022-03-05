@@ -2,11 +2,11 @@ import { useState } from "react";
 import { View, StyleSheet, Text, TextInput, GestureResponderEvent } from "react-native";
 import { colors } from "./Colors";
 
-export const Button = (props: { name?: string, enabled?: boolean, style?: any, onPress: (event: GestureResponderEvent) => void, children?: any }) => {
+export const Button = (props: { name?: string, greyed?: boolean, style?: any, onPress: (event: GestureResponderEvent) => void, children?: any }) => {
     const [value, setValue] = useState("");
 
     return (
-        <View style={[styles.buttonView, props.style]}>
+        <View style={[styles.buttonView, props.style, props.greyed ? styles.disabled : null ]}>
             <Text onPress={props.onPress} style={[styles.button]}>
             {props.children}
             </Text>
@@ -22,10 +22,13 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 2,
         textAlign:"center",
-        color: colors.white
+        color: colors.white,
     },
     buttonView: {
-        height: "auto",
-        width: "70%",
+        width: "75%",
+        // marginVertical: 50,
+    },
+    disabled: {
+        opacity: 0.7,
     }
 });
