@@ -10,23 +10,17 @@ import { isLoggedIn, signOut } from "../components/Credentials";
 import { Bar } from "../components/Bar";
 import { prestyled } from "../components/Styles";
 import { RoomElement } from "../components/RoomElement";
+import { RoomSearch } from "../components/RoomSearch";
 
 export const Rooms = ({ navigation }: any) => {
-
-    let rooms: string[] = [];
-    for (let i = 0; i < 20; i++) {
-        rooms.push(String(Math.round(Math.random() * 400)).padStart(3, "0"));
-        if (Math.random() < 0.2)
-            rooms.push(Math.round((Math.random() * 10) % 5 + 1) + "/" + Math.round((Math.random() * 10) % 2 + 1));
-    }
-    rooms.sort();
-
+    const [rooms, setRooms] = useState([]);
+    
     return (
-        <View style={{ alignItems: "center", height: Dimensions.get("window").height, backgroundColor: colors.background }}>
+        <View style={{ alignItems: "center", height: Dimensions.get("window").height}}>
             <Bar navigation={navigation} />
-            <Text>i love soffel</Text>
+            <RoomSearch onSearch={setRooms}/>
             <ScrollView style={styles.scrollView} contentContainerStyle={{ alignItems: "center" }}>
-                {rooms.map((e) => { return <RoomElement key={Math.random()} name={e} /> })}
+                {rooms.map((e) => { return <RoomElement key={e} name={e} /> })}
             </ScrollView>
         </View>
     );
@@ -35,5 +29,6 @@ export const Rooms = ({ navigation }: any) => {
 const styles = StyleSheet.create({
     scrollView: {
         width: "100%",
+        paddingVertical: 10,
     }
 })

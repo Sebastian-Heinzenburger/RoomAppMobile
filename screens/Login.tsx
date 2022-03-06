@@ -3,6 +3,7 @@ import { View, Text, Dimensions, StyleSheet } from "react-native"
 import { Button } from "../components/Button";
 
 import { ClearTextInput } from "../components/ClearTextInput";
+import { colors } from "../components/Colors";
 import { storeToken } from "../components/Credentials";
 import { prestyled } from "../components/Styles";
 
@@ -34,6 +35,7 @@ export const Login = ({ navigation }: any) => {
         if (!allright)
             return;
 
+        //TODO: move to Requests.tsx
         //@ts-ignore
         var url = `http://${global.address}/api/generateToken`;
         let xhr = new XMLHttpRequest();
@@ -70,7 +72,7 @@ export const Login = ({ navigation }: any) => {
     }
 
     return (
-        <View style={{ alignItems: "center", height: Dimensions.get("window").height }}>
+        <View style={{ alignItems: "center", height: Dimensions.get("window").height, backgroundColor: colors.background}} >
             <Text style={prestyled.header}>Anmelden</Text>
 
             <ClearTextInput error={errVorname} name="Vorname" valuePair={[vorname, (e) => { setErrVorname(false); setVorname(e) }]} />

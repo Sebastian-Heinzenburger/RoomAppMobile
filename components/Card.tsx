@@ -4,7 +4,7 @@ import { colors } from "./Colors";
 
 const imgSize = 180;
 
-export const Card = (props: { name?: string, description?: string, imageSource?: ImageSourcePropType, style?: any, onPress?: () => void, children?: any }) => {
+export const Card = (props: { name?: string, description?: string, color?: string, imageSource?: ImageSourcePropType, style?: any, onPress?: () => void, children?: any }) => {
     const [value, setValue] = useState("");
 
     return (
@@ -20,7 +20,7 @@ export const Card = (props: { name?: string, description?: string, imageSource?:
 
                     })()
                 }
-                <Text style={styles.cardHeader}>
+                <Text style={[styles.cardHeader, props.color ? {borderBottomColor: props.color} : {}]}>
                     {props.name}
                 </Text>
                 <Text style={styles.description}>
@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
     },
     cardHeader: {
         fontSize: 18,
-        borderBottomColor: colors.accent,
         borderBottomWidth: 2,
+        borderBottomColor: colors.accent,
         zIndex: 2,
     },
     description: {

@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, TextInput, KeyboardTypeOptions } from "react-na
 import { colors } from "./Colors";
 import { Dispatch, SetStateAction, useState } from "react";
 
-export const ClearTextInput = (props: { name?: string, type?: KeyboardTypeOptions, error?: boolean, valuePair: [string, Dispatch<SetStateAction<string>>], secureTextEntry?: boolean, style?: any }) => {
+export const ClearTextInput = (props: { name?: string, maxLenght?: number, type?: KeyboardTypeOptions, error?: boolean, valuePair: [string, Dispatch<SetStateAction<string>>], secureTextEntry?: boolean, style?: any }) => {
 
     return (
         <View style={[styles.textView, props.style]}>
@@ -14,6 +14,7 @@ export const ClearTextInput = (props: { name?: string, type?: KeyboardTypeOption
             <TextInput style={[styles.textInput, props.error ? { borderColor: colors.redorange } : null]}
                 value={props.valuePair[0]}
                 onChangeText={props.valuePair[1]}
+                maxLength={props.maxLenght}
                 keyboardType={props.type}
                 secureTextEntry={props.secureTextEntry} />
         </View>

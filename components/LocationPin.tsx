@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, Share as s, StyleSheet, Text, TextInput, GestureResponderEvent, ActivityIndicator } from "react-native";
 import { Icon } from "react-native-elements";
 import { colors } from "./Colors";
+import { setLocationReq } from "./Requests";
 
 
 export const LocationPin = (props: { location: string, style?: any, onPress?: (event: GestureResponderEvent) => void, children?: any }) => {
@@ -9,10 +10,7 @@ export const LocationPin = (props: { location: string, style?: any, onPress?: (e
 
     async function setLocation() {
         setLoading(true);
-        //alert("set location: " + props.location)
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
+        setLocationReq(props.location, () => {setLoading(false);});
     }
 
     return (
@@ -20,7 +18,7 @@ export const LocationPin = (props: { location: string, style?: any, onPress?: (e
             <Text onPress={setLocation}>
                 {
                     loading ?
-                        <ActivityIndicator color={colors.white} size={30}/> :
+                        <ActivityIndicator color={colors.white} size={30} /> :
                         <Icon type="material" name="location-pin" tvParallaxProperties={true} color={colors.white} />
                 }
             </Text>

@@ -4,6 +4,7 @@ import { Icon } from "react-native-elements";
 import { Button } from "./Button";
 import { colors } from "./Colors";
 import { signOut } from "./Credentials";
+import { setLocationReq } from "./Requests";
 import { Share } from "./Share";
 
 export const Bar = (props: { style?: StyleSheet, navigation?: any }) => {
@@ -39,7 +40,12 @@ export const Bar = (props: { style?: StyleSheet, navigation?: any }) => {
             </View>
             {showMenu &&
                 <View style={styles.menu}>
-                    <Text> Diese App wurde von Sebastian mit viel Liebe in einem einzigen langen Code-Sprint geschaffen</Text>
+                    <Button onPress={() => { setLocationReq("abc", () => {})}} style={{width: "100%",}}>
+                        Standort zurück- setzten
+                    </Button>
+                    <Button onPress={() => { props.navigation.push("Credits") }} style={{width: "100%",}}>
+                        info
+                    </Button>
                     <Button onPress={() => { signOut(); props.navigation.replace("Welcome"); }} style={{width: "100%",}}>
                         sign out
                     </Button>
@@ -60,6 +66,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingHorizontal: 10,
         height: 55,
+        elevation: 98,
     },
     title: {
         color: colors.white,
@@ -92,14 +99,25 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 35,
         right: 40,
-        width: 120,
+        width: 160,
         backgroundColor: colors.white,
-        paddingHorizontal: 5,
-        zIndex: 98,
+        padding: 6,
+        zIndex: 99,
+        elevation: 99,
+
+        shadowColor: colors.shadow,
+        shadowOffset: {
+            width: 9,
+            height: 9,
+        },
+        shadowOpacity: 0.97,
+        shadowRadius: 9,
+        borderRadius: 8,
     },
     menuToggle: {
         width: 40,
         textAlign: "center",
-        zIndex: 99,
+        zIndex: 100,
+        elevation: 100,
     }
 });

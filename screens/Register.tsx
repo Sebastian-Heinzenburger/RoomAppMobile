@@ -59,7 +59,8 @@ export const Register = ({ navigation }: any) => {
 
         if (!allright)
             return;
-
+        
+        //TODO: move to Requests.tsx
         //@ts-ignore
         var url = `http://${global.address}/api/createUser`;
         let xhr = new XMLHttpRequest();
