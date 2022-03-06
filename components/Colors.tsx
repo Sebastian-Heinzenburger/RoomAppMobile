@@ -9,4 +9,6 @@ export const colors = {
   yellow: "#F9C74F",
   background: "#eee",
   greyblue: "#577590",
+  shadow: "#000",
+  card: "#ddd",
 }

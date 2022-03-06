@@ -7,6 +7,7 @@ import { Register } from "./screens/Register";
 import { Welcome } from "./screens/Welcome";
 import { TOS } from './screens/TOS';
 import { Home } from './screens/Home';
+import { Rooms } from './screens/Rooms';
 
 
 const Stack = createNativeStackNavigator();
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Screen name='Welcome'  component={Welcome} />
         <Stack.Screen name='Login'    component={Login}     options={{animation: "slide_from_bottom"}}/>
         <Stack.Screen name='Register' component={Register}  options={{animation: "slide_from_bottom"}}/>
+        <Stack.Screen name='Rooms' component={Rooms}        options={{animation: "default"}}/>
         <Stack.Screen name='TOS'      component={TOS}       options={{headerShown: true, title: "Nutzungsbedingungen", animation: 'flip'}}/>
       </Stack.Navigator>
     </NavigationContainer>

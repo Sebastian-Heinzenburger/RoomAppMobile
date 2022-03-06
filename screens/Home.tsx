@@ -35,35 +35,28 @@ export const Home = ({ navigation }: any) => {
         <View style={{ justifyContent: "space-evenly", alignItems: "center", height: Dimensions.get("window").height, backgroundColor: colors.background }}>
             <Bar navigation={navigation} />
 
-                <Text> TOKEN: {
-                    //@ts-ignore
-                    global.token
-                } </Text>
                 <ScrollView style={styles.cardView} contentContainerStyle={{ alignItems: "center" }}>
                     <Card
-                        onPress={() => { navigation.push("Home"); }}
-                        imageSource={require("../assets/humans/1.png")}
+                        onPress={() => { navigation.push("Rooms"); }}
+                        imageSource={require("../assets/humans/5.png")}
                         name="Finde Räume"
                         description="Zu Jeder Stunde stehen in der Schule viele Räume leer. Finde und nutze sie!"
                     />
                     <Card
                         onPress={() => { navigation.push("Home"); }}
-                        imageSource={require("../assets/humans/1.png")}
+                        imageSource={require("../assets/humans/8.png")}
                         name="Finde Freunde"
-                        description="Du hast keine Ahnung wo deine Freunde gerade sind? Du bist komplett allein? Du willst nicht alle Räume in der Schule durchsuchen müssen?"
+                        description={"Du hast keine Ahnung wo deine Freunde gerade sind?\nDu bist komplett allein?\nDu willst nicht alle Räume in der Schule durchsuchen müssen?"}
                     />
                     <Card
                         onPress={() => { navigation.push("Home"); }}
-                        imageSource={require("../assets/humans/1.png")}
+                        imageSource={require("../assets/humans/7.png")}
                         name="Finde Lerngruppen"
                         description="Du brauchst Hilfe bei deinem Lieblingsfach?"
                     />
                 </ScrollView>
 
 
-                <Button onPress={() => { signOut(); navigation.replace("Welcome"); }}>
-                    sign out
-                </Button>
 
         </View>
     );
@@ -76,6 +69,6 @@ const styles = StyleSheet.create({
     cardView: {
         flex: 1,
         width: "100%",
-        backgroundColor: colors.green,
+        marginTop: 20,
     }
 });

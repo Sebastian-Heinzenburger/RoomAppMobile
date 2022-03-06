@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { View, StyleSheet, Text, TextInput, GestureResponderEvent, Image, Dimensions } from "react-native";
 import { Icon } from "react-native-elements";
+import { Button } from "./Button";
 import { colors } from "./Colors";
+import { signOut } from "./Credentials";
 import { Share } from "./Share";
 
 export const Bar = (props: { style?: StyleSheet, navigation?: any }) => {
@@ -38,6 +40,9 @@ export const Bar = (props: { style?: StyleSheet, navigation?: any }) => {
             {showMenu &&
                 <View style={styles.menu}>
                     <Text> Diese App wurde von Sebastian mit viel Liebe in einem einzigen langen Code-Sprint geschaffen</Text>
+                    <Button onPress={() => { signOut(); props.navigation.replace("Welcome"); }} style={{width: "100%",}}>
+                        sign out
+                    </Button>
                 </View>
             }
         </>
