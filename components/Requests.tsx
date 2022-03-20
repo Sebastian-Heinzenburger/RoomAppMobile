@@ -78,7 +78,7 @@ export async function getFriends() {
     }
 }
 
-export async function addFriend(fcode: number|string, onSend: any): Promise<any> {
+export async function addFriend(fcode: number | string, onSend: any): Promise<any> {
 
     //@ts-ignore
     var url = `http://${global.address}/api/addFriend`;
@@ -127,7 +127,7 @@ export async function getFriendRequests() {
     }
 }
 
-export async function setFriendRequest(fid: number, action: "accept"|"deny") {
+export async function setFriendRequest(fid: number, action: "accept" | "deny") {
     //@ts-ignore
     var url = `http://${global.address}/api/setFriendRequest`;
     let xhr = new XMLHttpRequest();
@@ -143,4 +143,30 @@ export async function setFriendRequest(fid: number, action: "accept"|"deny") {
 
     ///@ts-expect-error
     xhr.send(`token=${global.token}&fid=${fid}&action=${action}`);
+}
+
+export async function getGroups() {
+    ///@ts-expect-error
+    var url = `http://${global.address}/api/getGroups`;
+
+    try {
+        ///@ts-expect-error
+        let response = await fetch(url + `?token=${global.token}`)
+        try {
+            let text = await response.text()
+            let r = JSON.parse(text);
+            if (r.status == "ok")
+                return { groups: r.groups };
+            else {
+                alert("Konnte keine Freundschaftsanfragen abrufen: " + r.status);
+                return false;
+            }
+        } catch (e) {
+            alert("Konnte keine Daten vom Server empfangen: " + e);
+            return false;
+        }
+    } catch (e) {
+        alert("Konnte keine Verbindung zum Server aufbauen: " + e);
+        return false;
+    }
 }
