@@ -12,6 +12,7 @@ import { Credits } from './screens/Credit';
 import { Friends } from './screens/Friends';
 import { colors } from './components/Colors';
 import { AddFriends } from './screens/AddFriend';
+import { Lerngruppen } from './screens/Lerngruppen';
 
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +35,7 @@ export default function App() {
         <Stack.Screen name='Rooms' component={Rooms}        options={{animation: "default"}}/>
         <Stack.Screen name='Friends' component={Friends}        options={{animation: "default"}}/>
         <Stack.Screen name='AddFriends' component={AddFriends}        options={{animation: "slide_from_right"}}/>
+        <Stack.Screen name='Lerngruppen' component={Lerngruppen}        options={{animation: "default"}}/>
         <Stack.Screen name='TOS'      component={TOS}       options={{headerShown: true, title: "Nutzungsbedingungen", animation: 'flip'}}/>
         <Stack.Screen name='Credits'      component={Credits}  />     
       </Stack.Navigator>

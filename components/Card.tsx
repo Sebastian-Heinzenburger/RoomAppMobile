@@ -14,19 +14,19 @@ export const Card = (props: { name?: string, description?: string, color?: strin
                     (() => {
                         if (props.imageSource)
                             return (<View style={styles.imageView}>
-                                <Image source={props.imageSource} style={{ aspectRatio: 1, height: "85%" }} /> 
-                                </View>
+                                <Image source={props.imageSource} style={{ aspectRatio: 1, height: "85%" }} />
+                            </View>
                             );
 
                     })()
                 }
-                <Text style={[styles.cardHeader, props.color ? {borderBottomColor: props.color} : {}]}>
+                <Text style={[styles.cardHeader, props.color ? { borderBottomColor: props.color } : {}]}>
                     {props.name}
                 </Text>
-                <Text style={styles.description}>
-                    {props.description}
+                <View style={[styles.description, props.imageSource ? null : {width: "100%"}]}>
                     {props.children}
-                </Text>
+                    <Text>{props.description}</Text>
+                </View>
             </View>
         </TouchableWithoutFeedback>
     );
@@ -35,7 +35,7 @@ export const Card = (props: { name?: string, description?: string, color?: strin
 const styles = StyleSheet.create({
     cardView: {
         width: "82%",
-        height: imgSize+30,
+        height: imgSize + 30,
         backgroundColor: colors.card,
         marginVertical: 10,
         shadowColor: colors.shadow,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 
         elevation: 4,
         borderRadius: 5,
-        padding: Math.min(imgSize*0.1, 10),
+        padding: Math.min(imgSize * 0.1, 10),
     },
     imageView: {
         position: "absolute",

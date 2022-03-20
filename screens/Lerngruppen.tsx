@@ -9,50 +9,55 @@ import { colors } from "../components/Colors";
 import { isLoggedIn, signOut } from "../components/Credentials";
 import { Bar } from "../components/Bar";
 import { prestyled } from "../components/Styles";
+import { getGroups } from "../components/Requests";
+import { getColorForRoom, RoomElement } from "../components/RoomElement";
+import { Icon } from "react-native-elements";
 
-export const Home = ({ navigation }: any) => {
-    const [loggedIn, setLoggedIn] = useState(false);
+export const Lerngruppen = ({ navigation }: any) => {
+    const [groups, setGroups] = useState([]);
 
-    function open(screen: string) {
-        navigation.replace(screen);
+    const days = ["Mo", "Di", "Mi", "Do", "Fr"];
+    async function fetchGroups() {
+        let g = await getGroups();
+
+        if (!g)
+            return;
+
+        ///@ts-ignore
+        setGroups(g.groups)
     }
 
-
     useEffect(() => {
-        //this is fucking javascript in a nutshell. because we cant call an asyncronous function in this context,
-        //we have to declare and directly invoke an an anonymous asyncronous function that invokes the original function 
+
         (async () => {
-            const isloggedin = await isLoggedIn();
-            isloggedin ? setLoggedIn(true) : navigation.replace("Welcome")
-        })(); //this cost me my sanity
+            await fetchGroups();
+        })();
 
     }, [])
 
-    if (!loggedIn)
-        return (<></>);
-
     return (
-        <View style={{ alignItems: "center", height: Dimensions.get("window").height}}>
+        <View style={{ alignItems: "center", height: Dimensions.get("window").height }}>
             <Bar navigation={navigation} />
-            <ScrollView style={styles.cardView } contentContainerStyle={{ alignItems: "center" }}>
-                <Card
-                    onPress={() => { navigation.push("Rooms"); }}
-                    imageSource={require("../assets/humans/5.png")}
-                    name="Finde Räume"
-                    description="Zu Jeder Stunde stehen in der Schule viele Räume leer. Finde und nutze sie!"
-                />
-                <Card
-                    onPress={() => { navigation.push("Friends"); }}
-                    imageSource={require("../assets/humans/8.png")}
-                    name="Finde Freunde"
-                    description={"Du hast keine Ahnung wo deine Freunde gerade sind?\nDu bist komplett allein?\nDu willst nicht alle Räume in der Schule durchsuchen müssen?"}
-                />
-                <Card
-                    onPress={() => { navigation.push("Home"); }}
-                    imageSource={require("../assets/humans/7.png")}
-                    name="Finde Lerngruppen"
-                    description="Du brauchst Hilfe bei deinem Lieblingsfach?"
-                />
+            <ScrollView style={styles.cardView} contentContainerStyle={{ alignItems: "center" }}>
+                {groups.map(
+                    (g) => {
+                        return <Card
+                            name={g[0] + " - " + g[2] + " " + g[3]}
+                            description={g[1]}
+                            key={g[0] + Math.random()}
+                        >
+                            <View style={{ width: "101%", flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingRight: 5, marginVertical: 5, }}>
+                                <Text style={styles.details}>{days[g[5]]}, {Number.parseInt(g[6]) + 1}.Stunde   </Text>
+                                <View style={[{ backgroundColor: getColorForRoom(g[4]), padding: 5, borderRadius: 5, alignItems: "center", flexDirection: "row", width: 65 }]}>
+                                    <Icon type="material" name="location-pin" tvParallaxProperties={true} color={colors.white} />
+                                    <Text style={{ color: colors.white }}>
+                                        {g[4]}
+                                    </Text>
+                                </View>
+                            </View>
+                        </Card>
+                    }
+                )}
             </ScrollView>
         </View>
     );
@@ -67,5 +72,15 @@ const styles = StyleSheet.create({
         width: "100%",
         paddingTop: 10,
         //marginTop: 20,
+    },
+    details: {
+        // fontStyle: "italic",
+        // marginLeft: 60,
+        borderRadius: 8,
+        backgroundColor: colors.accent,
+        height: 35,
+        textAlignVertical: "center",
+        paddingLeft: 10,
+        color: colors.white
     }
 });
