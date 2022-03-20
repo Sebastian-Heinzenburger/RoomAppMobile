@@ -46,7 +46,6 @@ export const Login = ({ navigation }: any) => {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let response = JSON.parse(xhr.response);
-                console.log(response.status);
 
                 switch (response.status) {
                     case "ok":
