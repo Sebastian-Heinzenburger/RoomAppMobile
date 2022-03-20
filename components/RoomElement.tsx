@@ -5,22 +5,25 @@ import { LocationPin } from "./LocationPin";
 import { Share } from "./Share";
 
 
-export const RoomElement = (props: { name: any, style?: any }) => {
-
+export function getColorForRoom(room: any) {
     let roomColor = colors.greyblue;
 
-    if (!isNaN(props.name)) {
+    if (!isNaN(room)) {
         roomColor = colors.green;
-        if (100 < props.name && props.name)
+        if (100 < room && room)
             roomColor = colors.red;
-        if (200 < props.name && props.name)
+        if (200 < room && room)
             roomColor = colors.yellow;
-        if (300 < props.name && props.name)
-            roomColor = colors.accent;
+        if (300 < room && room)
+            roomColor = colors.greyblue;
     }
+    return roomColor;
+}
+
+export const RoomElement = (props: { name: any, style?: any }) => {
 
     return (
-        <View style={[styles.roomElementView, props.style, { backgroundColor: roomColor }]}>
+        <View style={[styles.roomElementView, props.style, { backgroundColor: getColorForRoom(props.name) }]}>
             <Text style={[styles.roomText]}>
                 {props.name}
             </Text>

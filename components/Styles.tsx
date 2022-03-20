@@ -9,6 +9,13 @@ export const prestyled = StyleSheet.create({
         borderBottomWidth: 4,
         marginBottom: 44,
     },
+    subheader: {
+        marginTop: 6,
+        fontSize: 18,
+        borderBottomColor: colors.accent,
+        borderBottomWidth: 3,
+        marginBottom: 10,
+    },
     buttonView: {
         width: "100%",
         alignItems: "center",

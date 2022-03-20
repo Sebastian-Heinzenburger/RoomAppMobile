@@ -14,11 +14,15 @@ import { RoomSearch } from "../components/RoomSearch";
 
 export const Rooms = ({ navigation }: any) => {
     const [rooms, setRooms] = useState([]);
-    
+    const [loading, setLoading] = useState(false);
+
     return (
-        <View style={{ alignItems: "center", height: Dimensions.get("window").height}}>
+        <View style={{ alignItems: "center", height: Dimensions.get("window").height }}>
             <Bar navigation={navigation} />
-            <RoomSearch onSearch={setRooms}/>
+            <RoomSearch onSearch={setRooms} loading={setLoading} />
+            {loading &&
+                <ActivityIndicator color={colors.accent} size={30} style={styles.loadingIndicator} />
+            }
             <ScrollView style={styles.scrollView} contentContainerStyle={{ alignItems: "center" }}>
                 {rooms.map((e) => { return <RoomElement key={e} name={e} /> })}
             </ScrollView>
@@ -30,5 +34,8 @@ const styles = StyleSheet.create({
     scrollView: {
         width: "100%",
         paddingVertical: 10,
+    },
+    loadingIndicator: {
+        marginTop: 20,
     }
 })

@@ -7,7 +7,7 @@ import { ClearTextInput } from "./ClearTextInput";
 import { colors } from "./Colors";
 import { getRooms } from "./Requests";
 
-export const RoomSearch = (props: { onSearch: any }) => {
+export const RoomSearch = (props: { onSearch: any, loading: any }) => {
 
     const [lesson, setLesson] = useState("1");
     const [date, setDate] = useState(new Date());
@@ -31,7 +31,7 @@ export const RoomSearch = (props: { onSearch: any }) => {
                 </View>
             </View>
             <View style={styles.row}>
-                <Button style={{ width: "100%" }} onPress={async () => { props.onSearch(await getRooms(Number.parseInt(lesson), date)) }}>
+                <Button style={{ width: "100%" }} onPress={async () => { props.loading(true); props.onSearch([]); props.onSearch(await getRooms(Number.parseInt(lesson), date)); props.loading(false); }}>
                     Suche starten
                 </Button>
             </View>

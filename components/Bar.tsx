@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { View, StyleSheet, Text, TextInput, GestureResponderEvent, Image, Dimensions } from "react-native";
+import { View, StyleSheet, Text, TextInput, GestureResponderEvent, Image, Dimensions, BackHandler } from "react-native";
 import { Icon } from "react-native-elements";
 import { Button } from "./Button";
-import { colors } from "./Colors";
+import { aestatic, classic, colors } from "./Colors";
 import { signOut } from "./Credentials";
 import { setLocationReq } from "./Requests";
 import { Share } from "./Share";
@@ -25,7 +25,7 @@ export const Bar = (props: { style?: StyleSheet, navigation?: any }) => {
                             return <Text style={styles.arrow} onPress={popBack}><Icon color={colors.white} tvParallaxProperties={true} type="font-awesome-5" name="arrow-left" /></Text>
                     })()}
                     <Image source={require("../assets/icon.png")} style={styles.image} />
-                    <Text style={styles.title}> RoomFinder </Text>
+                    <Text style={styles.title}> RoomApp </Text>
                 </View>
                 <View style={styles.right}>
                     <Share message="Schau dir mal die RoomApp an: https://roomapp.de/" />
@@ -40,13 +40,16 @@ export const Bar = (props: { style?: StyleSheet, navigation?: any }) => {
             </View>
             {showMenu &&
                 <View style={styles.menu}>
-                    <Button onPress={() => { setLocationReq("abc", () => {})}} style={{width: "100%",}}>
-                        Standort zurück- setzten
+                    <Button onPress={() => { setLocationReq("reset", () => {alert("Standort erfolgreich zurückgesetzt!")})}} style={styles.menuEntry}>
+                        Standort zurücksetzten
                     </Button>
-                    <Button onPress={() => { props.navigation.push("Credits") }} style={{width: "100%",}}>
+                    <Button onPress={async () => { alert("not supported yet") }} style={styles.menuEntry}>
+                        change theme
+                    </Button>
+                    <Button onPress={() => { props.navigation.push("Credits") }} style={styles.menuEntry}>
                         info
                     </Button>
-                    <Button onPress={() => { signOut(); props.navigation.replace("Welcome"); }} style={{width: "100%",}}>
+                    <Button onPress={() => { signOut(); props.navigation.replace("Welcome"); }} style={styles.menuEntry}>
                         sign out
                     </Button>
                 </View>
@@ -80,6 +83,10 @@ const styles = StyleSheet.create({
         height: 40,
         width: 40
     },
+    menuEntry: {
+        width: "100%",
+        fontSize: 3,
+    },
     left: {
         display: "flex",
         flexDirection: "row",
@@ -99,8 +106,8 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 35,
         right: 40,
-        width: 160,
-        backgroundColor: colors.white,
+        width: 170,
+        backgroundColor: colors.card,
         padding: 6,
         zIndex: 99,
         elevation: 99,

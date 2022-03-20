@@ -70,5 +70,6 @@ const styles = StyleSheet.create({
     description: {
         width: "60%",
         marginTop: 5,
+        zIndex: 4,
     }
 })

@@ -7,7 +7,7 @@ export const Button = (props: { name?: string, greyed?: boolean, style?: any, on
 
     return (
         <View style={[styles.buttonView, props.style, props.greyed ? styles.disabled : null ]}>
-            <Text onPress={props.onPress} style={[styles.button]}>
+            <Text onPress={props.onPress} style={[styles.button, props.greyed ? null : styles.shaddow]}>
             {props.children}
             </Text>
         </View>
@@ -23,6 +23,17 @@ const styles = StyleSheet.create({
         margin: 2,
         textAlign:"center",
         color: colors.white,
+    },
+    shaddow: {
+        shadowColor: colors.shadow,
+        shadowOffset: {
+            width: 3,
+            height: 3,
+        },
+        shadowOpacity: 0.50,
+        shadowRadius: 4.65,
+
+        elevation: 4,
     },
     buttonView: {
         width: "75%",

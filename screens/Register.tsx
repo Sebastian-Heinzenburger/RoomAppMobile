@@ -71,7 +71,6 @@ export const Register = ({ navigation }: any) => {
         xhr.onreadystatechange = async function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let response = JSON.parse(xhr.response);
-                console.log(response.status);
 
                 switch (response.status) {
                     case "ok":
